@@ -13,7 +13,7 @@ local Class = loadstring(game:HttpGet('https://raw.githubusercontent.com/TechHog
 --            Class:Config{filename = 'filename.extension', foldername = 'foldername'}
 --another way is:
 --            Class:Config{path = 'filepath'}
---path is an option incase you wanted more than one folder (maybe a folder called 'scriptname' and inside that one called 'configs')
+--path is an option incase you want to utilize more than one folder (maybe a folder called 'scriptname' and inside that one called 'configs')
 
 --this function either creates a new config or loads an already created one and returns it as a table
 --this allows ease of access as all you have to do is run the same function instead of manually checking and creating
