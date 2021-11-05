@@ -5,7 +5,7 @@
 > How to use?
 ```lua
 --first, get the class.
-local class = loadstring(game:HttpGet('https://raw.githubusercontent.com/TechHog8984/Configclass/main/Class.lua')()
+local class = loadstring(game:HttpGet('https://raw.githubusercontent.com/TechHog8984/Configclass/main/Class.lua'))()
 
 --to create a config, just run class:CreateConfig(filename, foldername)
 --filename is required, but foldername is optional
