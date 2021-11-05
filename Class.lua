@@ -21,7 +21,10 @@ function class:CreateConfig(filename, foldername)
 			config[index] = value
 			update()
 		end,
-	})
+	}), filepath
+end
+function class:GetConfig(filepath)
+	return httpservice:JSONDecode(readfile(filepath)) or nil
 end
 
 return class
