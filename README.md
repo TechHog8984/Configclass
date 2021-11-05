@@ -1,7 +1,6 @@
 # Configclass
 
 ## Configclass is a class that allows you to use configs for synapse easily.
-### All you have to do is run the :CreateClass function and then edit the table as you wish.
 
 > How to use?
 ```lua
