@@ -5,11 +5,31 @@ local class = {}
 function class:Config(info)
 	local filename, foldername, path = info['filename'], info['foldername'], info['path']
 
-	if path then
-		foldername, filename = unpack(path:split('/'))
-	end
+	local folders = {}
 
-	if filename then
+	if path then
+		folderpath = nil
+		foldername = ''
+		local split = path:split('/')
+		for i,v in next, split do
+			if i == #split then
+				filename = v
+			else
+				table.insert(folders, v)
+			end
+		end
+		for i = 1, #folders do
+			local name = folders[i]
+			if folderpath then
+				folderpath = folderpath .. '/' .. name
+			else
+				folderpath = name
+			end
+			if not isfolder(folderpath) then
+				makefolder(folderpath)
+			end
+		end
+	elseif filename then
 		path = filename
 		if foldername then
 			if not isfolder(foldername) then
