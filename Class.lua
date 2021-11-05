@@ -7,6 +7,7 @@ function class:Config(info)
 
 	if path then
 		filename, foldername = unpack(path:split('/'))
+		print(filename, foldername)
 	end
 
 	if filename then
