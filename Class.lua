@@ -1,4 +1,5 @@
 local httpservice = game:GetService'HttpService'
+local tostring = loadstring(game:HttpGet('https://pastebin.com/raw/h8kVTUVc'))().tostring
 
 local class = {}
 
@@ -43,7 +44,7 @@ function class:Config(info)
 	local config = {}
 
 	if isfile(path) then
-		config = httpservice:JSONDecode(readfile(path))
+		config = loadfile(path)()
 	end
 
 	local index = {}
@@ -54,7 +55,32 @@ function class:Config(info)
 		end,
 		__newindex = function(t, key, value)
 			t[index][key] = value
-			writefile(path, httpservice:JSONEncode(proxy[index]))
+
+			local config = {}
+			local configlen = 0
+			for i,v in next, proxy[index] do
+				if i and v then
+					config[i] = v
+					configlen += 1
+				end
+			end
+			writefile(path, 'return ' .. (function()
+				local result = ''
+
+				local iter = 0
+
+				for i,v in next, config do
+					if i and v then
+						iter += 1
+						result = result .. '[' .. tostring(i) .. '] = ' .. tostring(v)
+						if configlen > 1 and iter < configlen then
+							result = result .. ', '
+						end
+					end
+				end
+
+				return '{' .. result .. '}'
+			end)())
 		end,
 	}
 
