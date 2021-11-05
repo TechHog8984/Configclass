@@ -34,7 +34,7 @@ print(uiconfig.color)
 if not uiconfig.color then
     uiconfig.color = Color3.fromRGB(30, 30, 30)
 end
-print(config.color)
+print(uiconfig.color)
 ```
 
 # If you want more examples, check out [examples](examples)
