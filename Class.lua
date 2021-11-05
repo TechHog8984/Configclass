@@ -5,6 +5,10 @@ local class = {}
 function class:Config(info)
 	local filename, foldername, path = info['filename'], info['foldername'], info['path']
 
+	if path then
+		filename, foldername = unpack(path:split('/'))
+	end
+
 	if filename then
 		path = filename
 		if foldername then
