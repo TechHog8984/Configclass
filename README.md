@@ -25,4 +25,4 @@ config.aimbot = false
 config.aimbotkey = 'f'
 ```
 
-# If you want more examples, check out - [Examples](examples)
+# If you want more examples, check out [examples](examples)
