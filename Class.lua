@@ -1,43 +1,42 @@
-local class = {}
 local httpservice = game:GetService'HttpService'
 
-function class:CreateConfig(filename, foldername)
+local class = {}
+
+function class:Config(info)
+	local filename, foldername, path = info['filename'], info['foldername'], info['path']
+
 	if filename then
-		local filepath = filename
+		path = filename
 		if foldername then
-			filepath = foldername .. '/' .. filename
 			if not isfolder(foldername) then
 				makefolder(foldername)
 			end
+
+			path = foldername .. '/' .. path
 		end
-
-		local config = {}
-
-		local function update()
-			writefile(filepath, httpservice:JSONEncode(config))
-		end
-
-		return setmetatable({}, {
-			__index = function(self, index)
-				return config[index]
-			end,
-			__newindex = function(self, index, value)
-				config[index] = value
-				update()
-			end,
-		}), filepath
-	else
-		return 'filename is required'
 	end
-	return 'error'
-end
-function class:GetConfig(filepath)
-	local success, config = pcall(function() return httpservice:JSONDecode(readfile(filepath)) end)
-	if success then
-		return config
-	else
-		return nil
+
+	local config = {}
+
+	if isfile(path) then
+		config = httpservice:JSONDecode(readfile(path))
 	end
+
+	local index = {}
+	local proxy = {}
+	local mt = {
+		__index = function(t, key)
+			return t[index][key]
+		end,
+		__newindex = function(t, key, value)
+			t[index][key] = value
+			writefile(path, httpservice:JSONEncode(proxy[index]))
+		end,
+	}
+
+	proxy[index] = config
+	setmetatable(proxy, mt)
+	return proxy
 end
 
 return class
